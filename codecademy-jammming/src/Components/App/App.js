@@ -1,8 +1,8 @@
-import React from "react";
-import "./App.css";
-import SearchBar from "../SearchBar/SearchBar.js";
-import SearchResults from "../SearchResults/SearchResults.js";
-import Playlist from "../Playlist/Playlist.js";
+import React from 'react';
+import './App.css';
+import SearchBar from '../SearchBar/SearchBar.js';
+import SearchResults from '../SearchResults/SearchResults.js';
+import Playlist from '../Playlist/Playlist.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,36 +11,43 @@ class App extends React.Component {
     this.state = {
       searchResults: [
         {
-          name: "Parca as fute ceva",
-          artist: "Parazitii",
-          album: "Parca as fute ceva",
+          name: 'Parca as fute ceva',
+          artist: 'Parazitii',
+          album: 'Parca as fute ceva',
           id: 111222333,
         },
         {
-          name: "Parca as fute ceva2",
-          artist: "Parazitii",
-          album: "Parca as fute ceva2",
+          name: 'Parca as fute ceva2',
+          artist: 'Parazitii',
+          album: 'Parca as fute ceva2',
           id: 56655,
         },
       ],
-      playlistName: "Test Playlist",
+      playlistName: 'Test Playlist',
       playlistTracks: [
         {
-          name: "Cine e cu noi",
-          artist: "Bug mafia",
-          album: "Dupa Blocuri",
+          name: 'Cine e cu noi',
+          artist: 'Bug mafia',
+          album: 'Dupa Blocuri',
           id: 7742,
         },
         {
-          name: "Sa ma apuci de un coi",
-          artist: "Bug mafia",
-          album: "Dupa Blocuri",
+          name: 'Sa ma apuci de un coi',
+          artist: 'Bug mafia',
+          album: 'Dupa Blocuri',
           id: 7799,
         },
       ],
     };
 
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    
+  }
+
+  updatePlaylistName(name) {
+    this.setState({playlistName: name});
   }
 
   addTrack(track) {
@@ -53,6 +60,14 @@ class App extends React.Component {
     } else {
       this.setState(this.state.playlistTracks.push(track));
     }
+  }
+
+  removeTrack(track) {
+    this.setState({
+      playlistTracks: this.state.playlistTracks.filter((trackIndex) => {
+        return trackIndex.id !== track.id;
+      }),
+    });
   }
 
   render() {
@@ -71,6 +86,8 @@ class App extends React.Component {
             <Playlist
               playlistName={this.state.playlistName}
               playlistTracks={this.state.playlistTracks}
+              onRemove={this.removeTrack}
+              onNameChange={this.updatePlaylistName}
             />
           </div>
         </div>
