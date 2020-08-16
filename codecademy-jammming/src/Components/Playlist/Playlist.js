@@ -15,7 +15,7 @@ constructor(props){
   render() {
     return (
       <div className="Playlist">
-        <input defaultValue={'New Playlist'} onChange={this.handleNameChange}/>
+        <input defaultValue={this.props.playlistName} onChange={this.handleNameChange}/>
         <Tracklist
           tracks={this.props.playlistTracks}
           onRemove={this.props.onRemove}
