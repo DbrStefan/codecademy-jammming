@@ -1,4 +1,5 @@
 import React from 'react';
+import Sound from '../sound/Sound.js'
 import './Track.css';
 
 class Track extends React.Component {
@@ -35,7 +36,9 @@ class Track extends React.Component {
             {this.props.track.artist} | {this.props.track.album}
           </p>
         </div>
+        <Sound url={this.props.track.preview_url}/>
         {this.renderAction()}
+        
       </div>
     );
   }

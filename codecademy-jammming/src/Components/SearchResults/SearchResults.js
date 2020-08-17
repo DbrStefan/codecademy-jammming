@@ -3,6 +3,10 @@ import "./SearchResults.css";
 import Tracklist from "../Tracklist/Tracklist.js";
 
 class SearchResults extends React.Component {
+  filterTracks() {
+    
+  }
+
   render() {
     return (
       <div className="SearchResults">
@@ -12,6 +16,7 @@ class SearchResults extends React.Component {
           onAdd={this.props.onAdd}
           isRemoval={false}
         />
+        
       </div>
     );
   }

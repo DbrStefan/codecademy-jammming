@@ -11,8 +11,7 @@ let Spotify = {
 
     const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
     const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
-    console.log(accessTokenMatch);
-    console.log(expiresInMatch);
+    
     if (accessTokenMatch && expiresInMatch) {
       accessToken = accessTokenMatch[1];
       const expiresIn = Number(expiresInMatch[1]);
@@ -33,7 +32,7 @@ let Spotify = {
         Authorization: `Bearer ${accessToken}`,
       };
       let userId;
-      console.log(accessToken);
+      
       return fetch('https://api.spotify.com/v1/me', {
         headers: headers,
       })
@@ -46,7 +45,7 @@ let Spotify = {
           return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
             headers: headers,
             method: 'POST',
-            name: JSON.stringify({ name: name }),
+            body: JSON.stringify({ name: name }),
           })
             .then((response) => response.json())
             .then((jsonResponse) => {
@@ -89,6 +88,7 @@ let Spotify = {
             artist: track.artists[0].name,
             album: track.album.name,
             uri: track.uri,
+            preview_url: track.preview_url
           }));
         }
       });
