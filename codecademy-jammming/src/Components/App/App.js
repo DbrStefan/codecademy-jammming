@@ -67,8 +67,14 @@ class App extends React.Component {
   }
 
   search(searchTerm) {
-    Spotify.search(searchTerm).then((tracks) =>
-      this.setState({ searchResults: tracks })
+    Spotify.search(searchTerm).then((tracks) =>{
+      let filteredArray = []
+      tracks.forEach((track) => {
+        if(!this.state.playlistTracks.find(el=>el.id === track.id)) {
+          filteredArray.push(track);
+        }
+      })
+      this.setState({ searchResults: filteredArray })}
     );
   }
 
@@ -84,6 +90,7 @@ class App extends React.Component {
             <SearchResults
               searchResults={this.state.searchResults}
               onAdd={this.addTrack}
+              playlist={this.state.playlistTracks}
             />
             <Playlist
               playlistName={this.state.playlistName}
